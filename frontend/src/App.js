@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Route, Routes} from "react-router-dom"
 import Home from "./pages/Home";
 import SingleProduct from "./pages/SingleProduct";
-import Container from 'react-bootstrap/container';
+import Container from 'react-bootstrap/Container';
 import NavbarComp from './components/NavbarComp';
 import Cart from "./pages/Cart";
 import SigninPage from "./pages/SigninPage";
