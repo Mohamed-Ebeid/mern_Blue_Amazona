@@ -5,7 +5,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/container';
+import Container from 'react-bootstrap/Container';
 import {LinkContainer} from 'react-router-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
