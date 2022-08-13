@@ -44,7 +44,7 @@ function Home(){
 			try{
 				const result= await axios.get('/api/products');//2-fetch here
 				dispatch({type:'FETCH_SUCCESS', payload:result.data});//3-send the result
-
+				//console.log(result.data)
 			}
 			catch(e){
 				dispatch({type:'FETCH_FAILED', payload:e.message})

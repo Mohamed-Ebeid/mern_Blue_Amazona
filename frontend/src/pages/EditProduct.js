@@ -108,23 +108,26 @@ const EditProduct =()=> {
   }
 
   const uploadImgHandler= async (e)=>{
-        e.preventDefault()
-        const file = e.target.files[0];
-        //console.log(file);
-        const formData = new FormData();
-        formData.append('image', file);
-        setUploading(true);
-        try{
-          const {data}= await axios.post('/api/uploads', formData, 
-            {headers:{ authorization: `Bearer ${userInfo.token}`}}
-            )
-          setImage(data);
-          setUploading(false);
-        }
-        catch(e){
-          toast.error(getError(e))
-        }
-  }
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append('file', file);
+    try {
+      dispatch({ type: 'UPDATE_REQUEST' });
+      const { data } = await axios.post('/api/uploads', bodyFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      dispatch({ type: 'UPLOAD_SUCCESS' });
+
+      toast.success('Image uploaded successfully');
+      setImage(data.secure_url);
+    } catch (err) {
+      toast.error(getError(err));
+      dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
+    }
+  };
 
   return (
     <div>
