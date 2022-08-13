@@ -110,7 +110,7 @@ userRouter.get('/:id', isAuth, isAdmin, expressAsyncHandler(async (req, res)=>{
 userRouter.put('/:id', isAuth, isAdmin, expressAsyncHandler(async (req, res)=>{
     // console.log(req);
     const user = await User.findById(req.params.id)
-    console.log(user);
+    //console.log(user);
     if(user){
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
