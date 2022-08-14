@@ -22,14 +22,14 @@ const reducer=(state, action)=>{
     case 'FETCH_FAILED':
       return{...state, loading:false, error:action.payload};
 
-    case 'UPDATE_REQUEST':
-      return { ...state, loadingUpdate: true, successUpdate: false };
+    case 'UPLOAD_REQUEST':
+      return { ...state, loadingUpload: true};
 
-    case 'UPDATE_SUCCESS':
-      return {  ...state, loadingUpdate: false, successUpdate: true };
+    case 'UPLOAD_SUCCESS':
+      return {  ...state, loadingUpload: false };
 
-    case 'UPDATE_FAILED':
-      return { ...state, loadingUpdate: false };
+    case 'UPLOAD_FAILED':
+      return { ...state, loadingUpload: false };
 
     default:
       return state;
@@ -40,7 +40,7 @@ const EditProduct =()=> {
   const{state}= useContext(Store);
   const {userInfo} = state;
 
-    const[{loading, error}, dispatch] 
+    const[{loading, error, loadingUpload}, dispatch] 
   =useReducer(reducer, {loading:false, error:'' })
 
   const {id} = useParams();
@@ -54,7 +54,6 @@ const EditProduct =()=> {
   const[slug, setSlug]= useState('');
   const[countInStock, setCountInStock]= useState(0);  
   const[description, setDescription]= useState('');
-  const[uploading, setUploading]= useState(false);
 
   useEffect(()=>{
     dispatch({type:"FETCH_REQUEST"});
@@ -112,7 +111,7 @@ const EditProduct =()=> {
     const bodyFormData = new FormData();
     bodyFormData.append('file', file);
     try {
-      dispatch({ type: 'UPDATE_REQUEST' });
+      dispatch({ type: 'UPLOAD_REQUEST' });
       const { data } = await axios.post('/api/uploads', bodyFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -120,12 +119,11 @@ const EditProduct =()=> {
         },
       });
       dispatch({ type: 'UPLOAD_SUCCESS' });
-
       toast.success('Image uploaded successfully');
       setImage(data.secure_url);
     } catch (err) {
       toast.error(getError(err));
-      dispatch({ type: 'UPLOAD_FAIL', payload: getError(err) });
+      dispatch({ type: 'UPLOAD_FAILED', payload: getError(err) });
     }
   };
 
@@ -168,7 +166,7 @@ const EditProduct =()=> {
                     <Form.Label>Upload File</Form.Label>
                     <Form.Control type="file" onChange={uploadImgHandler} />
                 </Form.Group>
-                {uploading && <Loading/>}
+                {loadingUpload && <Loading/>}
                 <Form.Group controlId='brand'>
                   <Form.Label>Brand</Form.Label>
                   <Form.Control

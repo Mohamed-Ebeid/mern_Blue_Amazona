@@ -9,8 +9,7 @@ const upload = multer();
 const uploadRouter = express.Router();
 
 uploadRouter.post(
-  '/', isAuth, isAdmin,
-  upload.single('file'),
+  '/', isAuth, isAdmin, upload.single('file'),
   async (req, res) => {
     cloudinary.config({
       cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
