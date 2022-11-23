@@ -1,5 +1,4 @@
 {
-  "homepage": "https://blue-amazona-app.vercel.app",
   "name": "mern-stack-01",
   "proxy": "http://localhost:5000",
   "version": "0.1.0",

@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "./backend/server.js", // path to your server.js file
+      "src": "./backend/index.js", // path to your index.js file
       "use": "@vercel/node"
     },
     {
@@ -11,7 +11,7 @@
     }
   ],
 
-  // rewrites any request to api call with server.js
+  // rewrites any request to api call with index.js
   // now your "app.use('/some-route')" would work as normal as localhost
   // no need to change your codes to serverless way
 
@@ -22,7 +22,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/backend/server.js"
+      "dest": "/backend/index.js"
     }
   ]
 }
