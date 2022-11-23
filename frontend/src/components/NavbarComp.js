@@ -141,7 +141,6 @@ export default function NavbarComp() {
                     </Container>
                 </Navbar>
                 </div>
-  
-    
+
   )
 }
